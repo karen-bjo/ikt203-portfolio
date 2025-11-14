@@ -3,8 +3,8 @@
 #include <iostream>
 #include "option2.h"
 #include "SharedLib.h"
-#include "song.h"
-#include "songList.h"
+#include "../../scratch/song.h"
+#include "../../scratch/songList.h"
 
 static TSongList* songs = nullptr;
 static TSongQueue* playQueue = nullptr;
