@@ -10,6 +10,11 @@ option(BUILD_ASSIGNMENT_03_OPTION_1 "Build Assignment Option 1 (Standard)" ON)
 
 add_executable(Assignment-03
     main.cpp
+        TEmployee.h
+        BST.cpp
+        BST.h
+        AVLTree.cpp
+        AVLTree.h
 )
 
 # Conditionally add the correct source file
