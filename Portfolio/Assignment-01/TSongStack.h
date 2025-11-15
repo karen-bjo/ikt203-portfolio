@@ -9,12 +9,12 @@ public:
     TSongStack();
     ~TSongStack();
 
-    void   push(TSong* song);  // LIFO push
-    TSong* pop();              // LIFO pop, nullptr if empty
-    bool   isEmpty() const;
+    void push(TSong* song);  // LIFO push
+    TSong* pop();            // LIFO pop, nullptr if empty
+    bool isEmpty() const;
 
     // Extra (beyond assignment): see all history
-    void   print() const;
+    void print() const;
 
     TSongStack(const TSongStack&) = delete;
     TSongStack& operator=(const TSongStack&) = delete;
@@ -24,7 +24,7 @@ private:
     {
     public:
         TSong* data;
-        Node*  next;
+        Node* next;
 
         Node(TSong* d, Node* n)
             : data(d), next(n) {}

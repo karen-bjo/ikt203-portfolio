@@ -11,15 +11,15 @@ public:
     ~TSongQueue();
 
     // Standard queue ops
-    void   enqueue(TSong* song);   // add at back
+    void enqueue(TSong* song);   // add at back
     TSong* dequeue();              // remove from front, nullptr if empty
-    bool   isEmpty() const;
+    bool isEmpty() const;
 
     // Needed for "play previous": add at front of wish queue
-    void   enqueueFront(TSong* song);
+    void enqueueFront(TSong* song);
 
     // Extra (beyond assignment): debug / inspection
-    void   print() const;
+    void print() const;
 
     TSongQueue(const TSongQueue&) = delete;
     TSongQueue& operator=(const TSongQueue&) = delete;

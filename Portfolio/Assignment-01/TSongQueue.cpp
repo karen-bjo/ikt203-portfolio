@@ -2,9 +2,7 @@
 #include <iostream>
 
 TSongQueue::TSongQueue()
-    : front(nullptr), back(nullptr)
-{
-}
+    : front(nullptr), back(nullptr) {}
 
 TSongQueue::~TSongQueue()
 {
@@ -21,7 +19,7 @@ void TSongQueue::clear()
         current = next;
     }
     front = nullptr;
-    back  = nullptr;
+    back = nullptr;
 }
 
 bool TSongQueue::isEmpty() const
@@ -36,12 +34,12 @@ void TSongQueue::enqueue(TSong* song)
     if (back == nullptr)
     {
         front = node;
-        back  = node;
+        back = node;
     }
     else
     {
         back->next = node;
-        back       = node;
+        back = node;
     }
 }
 
@@ -53,7 +51,7 @@ TSong* TSongQueue::dequeue()
     }
 
     Node* node = front;
-    front      = front->next;
+    front = front->next;
     if (front == nullptr)
     {
         back = nullptr;
@@ -67,7 +65,7 @@ TSong* TSongQueue::dequeue()
 void TSongQueue::enqueueFront(TSong* song)
 {
     Node* node = new Node(song, front);
-    front      = node;
+    front = node;
     if (back == nullptr)
     {
         back = node;
@@ -77,7 +75,7 @@ void TSongQueue::enqueueFront(TSong* song)
 void TSongQueue::print() const
 {
     Node* current = front;
-    int   index   = 0;
+    int index = 0;
 
     while (current != nullptr)
     {

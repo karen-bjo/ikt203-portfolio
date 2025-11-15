@@ -34,8 +34,8 @@ private:
     {
     public:
         TSong* data;
-        Node*  prev;
-        Node*  next;
+        Node* prev;
+        Node* next;
 
         Node(TSong* d, Node* p, Node* n)
             : data(d), prev(p), next(n) {}

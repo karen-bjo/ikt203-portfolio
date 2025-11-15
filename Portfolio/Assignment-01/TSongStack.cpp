@@ -31,7 +31,7 @@ bool TSongStack::isEmpty() const
 void TSongStack::push(TSong* song)
 {
     Node* node = new Node(song, top);
-    top        = node;
+    top = node;
 }
 
 TSong* TSongStack::pop()
@@ -42,7 +42,7 @@ TSong* TSongStack::pop()
     }
 
     Node* node = top;
-    top        = top->next;
+    top = top->next;
 
     TSong* song = node->data;
     delete node;
@@ -52,7 +52,7 @@ TSong* TSongStack::pop()
 void TSongStack::print() const
 {
     Node* current = top;
-    int   index   = 0;
+    int index = 0;
 
     while (current != nullptr)
     {
