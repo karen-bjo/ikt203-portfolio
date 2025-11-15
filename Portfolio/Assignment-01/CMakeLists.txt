@@ -10,7 +10,17 @@ option(BUILD_ASSIGNMENT_01_OPTION_1 "Build Assignment Option 1 (Standard)" OFF)
 
 add_executable(Assignment-01
     main.cpp
- "song.cpp" "song.h" "songList.cpp" "songList.h")
+        TSong.cpp
+        TSong.h
+        TSongLibraryList.cpp
+        TSongLibraryList.h
+        TSongQueue.cpp
+        TSongQueue.h
+        TSongStack.cpp
+        TSongStack.h
+        MusicPlayerApp.cpp
+        MusicPlayerApp.h
+)
 
 # Conditionally add the correct source file
 if(BUILD_ASSIGNMENT_01_OPTION_1)
