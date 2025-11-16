@@ -1,9 +1,11 @@
 #pragma once
 #include "TEmployee.h"
 
-class TAVLTree {
+class TAVLTree
+{
 private:
-    struct TNode {
+    struct TNode
+    {
         int key;
         TEmployee* data;
         TNode* left;

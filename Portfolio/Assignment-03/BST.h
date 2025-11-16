@@ -1,9 +1,11 @@
 #pragma once
 #include "TEmployee.h"
 
-class TBST {
+class TBST
+{
 private:
-    struct TNode {
+    struct TNode
+    {
         int key;
         TEmployee* data;
         TNode* left;

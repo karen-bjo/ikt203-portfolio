@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 
-struct TEmployee {
+struct TEmployee
+{
     int employeeId;
     std::string firstName;
     std::string lastName;
