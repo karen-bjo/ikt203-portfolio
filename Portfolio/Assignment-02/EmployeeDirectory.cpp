@@ -9,9 +9,9 @@ static EmployeeNode* g_masterHead = nullptr;
 static std::vector<TEmployee*> g_masterArray;
 static std::vector<TEmployee*> g_searchArray;
 
-static bool g_isListSortedByName  = false;
+static bool g_isListSortedByName = false;
 static bool g_isArraySortedByDept = false;
-static bool g_isSearchBuilt       = false;
+static bool g_isSearchBuilt = false;
 
 bool hasEmployees()
 {
@@ -48,30 +48,28 @@ void clearEmployees()
     g_masterArray.clear();
     g_searchArray.clear();
 
-    g_isListSortedByName  = false;
+    g_isListSortedByName = false;
     g_isArraySortedByDept = false;
-    g_isSearchBuilt       = false;
+    g_isSearchBuilt = false;
 }
 
-static bool NameReadCallback(const int aIndex,
-                             const int aTotalCount,
-                             const std::string& aFirstName,
+static bool NameReadCallback(const int aIndex, const int aTotalCount, const std::string& aFirstName,
                              const std::string& aLastName)
 {
     (void)aIndex;
     (void)aTotalCount;
 
     TEmployee* emp = new TEmployee;
-    emp->firstName  = aFirstName;
-    emp->lastName   = aLastName;
+    emp->firstName = aFirstName;
+    emp->lastName = aLastName;
     emp->department = getRandomDepartment();
 
     appendToMasterList(emp);
     g_masterArray.push_back(emp);
 
-    g_isListSortedByName  = false;
+    g_isListSortedByName = false;
     g_isArraySortedByDept = false;
-    g_isSearchBuilt       = false;
+    g_isSearchBuilt = false;
 
     return true;
 }
@@ -82,19 +80,17 @@ void loadEmployees(const std::string& filename)
 
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    std::cout << "Loading employees from: " << filename << "\n";
+    std::cout << "Loading employees from: " << filename << std::endl;
     readNamesFromFile(filename, NameReadCallback);
-    std::cout << "Done.\n";
+    std::cout << "Done." << std::endl;
 }
 
-static void splitList(EmployeeNode* source,
-                      EmployeeNode** frontRef,
-                      EmployeeNode** backRef)
+static void splitList(EmployeeNode* source, EmployeeNode** frontRef, EmployeeNode** backRef)
 {
     if (!source || !source->next)
     {
         *frontRef = source;
-        *backRef  = nullptr;
+        *backRef = nullptr;
         return;
     }
 
@@ -112,15 +108,16 @@ static void splitList(EmployeeNode* source,
     }
 
     *frontRef = source;
-    *backRef  = slow->next;
+    *backRef = slow->next;
     slow->next = nullptr;
 }
 
-static EmployeeNode* sortedMerge(EmployeeNode* a,
-                                 EmployeeNode* b)
+static EmployeeNode* sortedMerge(EmployeeNode* a, EmployeeNode* b)
 {
-    if (!a) return b;
-    if (!b) return a;
+    if (!a)
+        return b;
+    if (!b)
+        return a;
 
     EmployeeNode* result = nullptr;
 
@@ -159,7 +156,7 @@ void sortMasterListByName()
     {
         mergeSortListInternal(&g_masterHead);
         g_isListSortedByName = true;
-        g_isSearchBuilt      = false;
+        g_isSearchBuilt = false;
     }
 }
 
@@ -213,8 +210,7 @@ void buildSearchArray()
     g_isSearchBuilt = true;
 }
 
-int binarySearchEmployee(const std::string& last,
-                         const std::string& first)
+int binarySearchEmployee(const std::string& last, const std::string& first)
 {
     if (!g_isSearchBuilt)
     {
@@ -233,7 +229,7 @@ int binarySearchEmployee(const std::string& last,
         int cmp = employeeCompareToName(e, last, first);
         if (cmp == 0) return mid;
         if (cmp < 0)  left  = mid + 1;
-        else          right = mid - 1;
+        else right = mid - 1;
     }
     return -1;
 }
@@ -245,41 +241,42 @@ const std::vector<TEmployee*>& getSearchArray()
 
 void printEmployee(const TEmployee* e)
 {
-    std::cout << e->lastName << ", " << e->firstName
-              << "  [" << departmentToString(e->department) << "]\n";
+    std::cout << e->lastName << ", " << e->firstName << "  [" << departmentToString(e->department) << "]" << std::endl;
 }
 
 void printMasterRollCall()
 {
     if (!g_masterHead)
     {
-        std::cout << "No employees loaded\n";
+        std::cout << "No employees loaded" << std::endl;
         return;
     }
 
     sortMasterListByName();
 
-    std::cout << "\nMaster Roll Call (Last, First)\n";
+    std::cout << std::endl;
+    std::cout << "Master Roll Call (Last, First)" << std::endl;
     EmployeeNode* cur = g_masterHead;
     while (cur)
     {
         printEmployee(cur->data);
         cur = cur->next;
     }
-    std::cout << "--------------------\n";
+    std::cout << "--------------------" << std::endl;
 }
 
 void printOrganizationalChart()
 {
     if (g_masterArray.empty())
     {
-        std::cout << "No employees loaded\n";
+        std::cout << "No employees loaded" << std::endl;
         return;
     }
 
     sortMasterArrayByDept();
 
-    std::cout << "\nOrganizational Chart (Dept, Last, First)\n";
+    std::cout << std::endl;
+    std::cout << "Organizational Chart (Dept, Last, First)" << std::endl;
     std::string currentDept;
 
     for (TEmployee* e : g_masterArray)
@@ -288,9 +285,10 @@ void printOrganizationalChart()
         if (deptName != currentDept)
         {
             currentDept = deptName;
-            std::cout << "\n-- " << currentDept << " --\n";
+            std::cout << std::endl;
+            std::cout << "-- " << currentDept << " --" << std::endl;
         }
         printEmployee(e);
     }
-    std::cout << "--------------------\n";
+    std::cout << "--------------------" << std::endl;
 }

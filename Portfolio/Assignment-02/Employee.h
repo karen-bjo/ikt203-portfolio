@@ -22,9 +22,7 @@ bool employeeNameLess(const TEmployee* a, const TEmployee* b);
 
 int employeeDeptCompare(const TEmployee* a, const TEmployee* b);
 
-int employeeCompareToName(const TEmployee* e,
-                          const std::string& last,
-                          const std::string& first);
+int employeeCompareToName(const TEmployee* e, const std::string& last, const std::string& first);
 
 std::string departmentToString(EDepartment d);
 EDepartment getRandomDepartment();

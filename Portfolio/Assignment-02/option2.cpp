@@ -12,12 +12,13 @@ int RunApp()
 
     while (running)
     {
-        std::cout << "\nCombined Corporate Directory:\n";
-        std::cout << "1. Load employees from file\n";
-        std::cout << "2. Show master roll call (Merge Sort on list)\n";
-        std::cout << "3. Show organizational chart (Quick Sort on array)\n";
-        std::cout << "4. Look up employee (Binary Search on array)\n";
-        std::cout << "5. Exit\n";
+        std::cout << std::endl;
+        std::cout << "Combined Corporate Directory:" << std::endl;
+        std::cout << "1. Load employees from file" << std::endl;
+        std::cout << "2. Show master roll call (Merge Sort on list)" << std::endl;
+        std::cout << "3. Show organizational chart (Quick Sort on array)" << std::endl;
+        std::cout << "4. Look up employee (Binary Search on array)" << std::endl;
+        std::cout << "5. Exit" << std::endl;
         std::cout << "Choice: ";
 
         int choice = 0;
@@ -25,7 +26,7 @@ int RunApp()
         {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input\n";
+            std::cout << "Invalid input" << std::endl;
             continue;
         }
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -48,7 +49,7 @@ int RunApp()
         {
             if (!hasEmployees())
             {
-                std::cout << "No employees loaded\n";
+                std::cout << "No employees loaded" << std::endl;
                 break;
             }
 
@@ -61,11 +62,11 @@ int RunApp()
             int idx = binarySearchEmployee(last, first);
             if (idx < 0)
             {
-                std::cout << "Employee not found\n";
+                std::cout << "Employee not found" << std::endl;
             }
             else
             {
-                std::cout << "Employee found:\n";
+                std::cout << "Employee found:" << std::endl;
                 printEmployee(getSearchArray()[static_cast<std::size_t>(idx)]);
             }
             break;
@@ -74,7 +75,7 @@ int RunApp()
             running = false;
             break;
         default:
-            std::cout << "Invalid choice.\n";
+            std::cout << "Invalid choice." << std::endl;
             break;
         }
     }

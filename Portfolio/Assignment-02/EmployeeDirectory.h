@@ -16,10 +16,10 @@ void clearEmployees();
 
 void sortMasterListByName();
 void sortMasterArrayByDept();
+
 void buildSearchArray();
 
-int binarySearchEmployee(const std::string& last,
-                         const std::string& first);
+int binarySearchEmployee(const std::string& last, const std::string& first);
 
 void printEmployee(const TEmployee* e);
 void printMasterRollCall();
