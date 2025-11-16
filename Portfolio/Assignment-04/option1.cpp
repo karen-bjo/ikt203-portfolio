@@ -53,12 +53,12 @@ int RunApp()
 	//readGraphFromFile is implemented in ReadGraph.cpp, declared in SharedLib.h
 	readGraphFromFile(filePath, OnNodeRead, OnEdgeRead);
 
-	std::cout << "Nodes loaded from graph:\n";
+	std::cout << "Nodes loaded from graph:" << std::endl;
 	for (TNode *node : graph.getNodes())
 	{
-		std::cout << "- " << node->getName() << '\n';
+		std::cout << "- " << node->getName() << std::endl;
 	}
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	std::string sourceName;
 	std::string destinationName;
@@ -84,11 +84,12 @@ int RunApp()
 				std::cout << " -> ";
 			}
 		}
-		std::cout << "\nTotal latency: " << totalCost << '\n';
+		std::cout << std::endl;
+		std::cout << "Total latency: " << totalCost << std::endl;
 	}
 	else
 	{
-		std::cout << "No path found, or one of the server names was invalid.\n";
+		std::cout << "No path found, or one of the server names was invalid." << std::endl;
 	}
 
 

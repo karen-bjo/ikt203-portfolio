@@ -19,9 +19,7 @@ public:
     TNode *findNode(const std::string &name) const;
 
     //adds an undirected edge (both directions)
-    void addUndirectedEdge(const std::string &fromName,
-                           const std::string &toName,
-                           int weight);
+    void addUndirectedEdge(const std::string &fromName, const std::string &toName, int weight);
 
     const std::vector<TNode*> &getNodes() const;
 
