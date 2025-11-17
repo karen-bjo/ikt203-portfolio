@@ -27,10 +27,7 @@ static bool OnNodeRead(int index, int total, const std::string &nodeName)
 }
 
 //callback for each edge line in the file
-static bool OnEdgeRead(int index, int total,
-					   const std::string &fromNode,
-					   const std::string &toNode,
-					   float weight)
+static bool OnEdgeRead(int index, int total, const std::string &fromNode, const std::string &toNode, float weight)
 {
 	if (gCurrentGraph == nullptr)
 	{
