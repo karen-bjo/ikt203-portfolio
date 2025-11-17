@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IKT203_COURSE_ASSIGNMENTS_EMPLOYEE_DIRECTORY_H
+#define IKT203_COURSE_ASSIGNMENTS_EMPLOYEE_DIRECTORY_H
+
 #include <vector>
 #include <string>
 #include "Employee.h"
@@ -26,3 +28,5 @@ void printMasterRollCall();
 void printOrganizationalChart();
 
 const std::vector<TEmployee*>& getSearchArray();
+
+#endif // IKT203_COURSE_ASSIGNMENTS_EMPLOYEE_DIRECTORY_H

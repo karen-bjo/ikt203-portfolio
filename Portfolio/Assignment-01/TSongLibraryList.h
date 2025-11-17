@@ -22,9 +22,6 @@ public:
     // Print all songs in forward order. (Required-ish for UI)
     void printAll() const;
 
-    // Extra (beyond assignment): show list in reverse order using prev pointers.
-    void printAllReverse() const;
-
     // Disable copying (avoids double-delete bugs).
     TSongLibraryList(const TSongLibraryList&) = delete;
     TSongLibraryList& operator=(const TSongLibraryList&) = delete;

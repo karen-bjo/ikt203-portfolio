@@ -86,7 +86,6 @@ TAVLTree::TNode* TAVLTree::insertRecursive(TNode* node, int key, TEmployee* data
     }
     else
     {
-        // duplicate key, ignore
         return node;
     }
 
@@ -94,23 +93,19 @@ TAVLTree::TNode* TAVLTree::insertRecursive(TNode* node, int key, TEmployee* data
 
     int balance = getBalanceFactor(node);
 
-    // LL
     if (balance > 1 && key < node->left->key)
     {
         return rightRotate(node);
     }
-    // RR
     if (balance < -1 && key > node->right->key)
     {
         return leftRotate(node);
     }
-    // LR
     if (balance > 1 && key > node->left->key)
     {
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
-    // RL
     if (balance < -1 && key < node->right->key)
     {
         node->right = rightRotate(node->right);

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IKT203_COURSE_ASSIGNMENTS_BST_H
+#define IKT203_COURSE_ASSIGNMENTS_BST_H
+
 #include "TEmployee.h"
 
 class TBST
@@ -41,3 +43,5 @@ public:
     void postorder() const;
     void levelOrder() const;
 };
+
+#endif // IKT203_COURSE_ASSIGNMENTS_BST_H

@@ -15,25 +15,16 @@
 
 static bool LoadEmployees(std::vector<TEmployee*>& outEmployees)
 {
-    std::string filePath = GetDataPath("random_names.txt");;
+    std::string filePath = GetDataPath("random_names.txt");
 
     std::ifstream in(filePath);
     if (!in.is_open())
     {
-        std::cout << "Could not open default path '" << filePath << std::endl;
-        std::cout << "Enter full path to random_names.txt:" << std::endl;
-        std::cout << "> ";
-        std::getline(std::cin >> std::ws, filePath);
-        in.open(filePath);
-        if (!in.is_open())
-        {
-            std::cout << "Still could not open file. Aborting." << std::endl;
-            return false;
-        }
+        std::cout << "Error: Could not open file '" << filePath << "'." << std::endl;
+        return false;
     }
 
-
-    const int MAX_EMPLOYEES = 200;
+    constexpr int MAX_EMPLOYEES = 200;
 
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
@@ -74,13 +65,11 @@ static bool LoadEmployees(std::vector<TEmployee*>& outEmployees)
         std::string first;
         std::string last;
 
-        // Very simple parsing: "First Last"
         if (!(iss >> first >> last))
         {
             continue;
         }
 
-        // Strip trailing comma from last if present (e.g., "Smith,")
         if (!last.empty() && last.back() == ',')
         {
             last.pop_back();
@@ -228,7 +217,6 @@ int RunApp()
         }
     }
 
-    // Trees do NOT own employees; free them here
     for (TEmployee* e : employees)
     {
         delete e;

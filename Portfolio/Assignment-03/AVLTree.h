@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IKT203_COURSE_ASSIGNMENTS_AVL_TREE_H
+#define IKT203_COURSE_ASSIGNMENTS_AVL_TREE_H
+
 #include "TEmployee.h"
 
 class TAVLTree
@@ -46,3 +48,5 @@ public:
     void postorder() const;
     void levelOrder() const;
 };
+
+#endif // IKT203_COURSE_ASSIGNMENTS_AVL_TREE_H

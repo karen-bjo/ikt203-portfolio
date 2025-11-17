@@ -36,7 +36,6 @@ TBST::TNode* TBST::insertRecursive(TNode* node, int key, TEmployee* data)
     {
         node->right = insertRecursive(node->right, key, data);
     }
-    // duplicate keys are ignored
     return node;
 }
 
@@ -77,7 +76,6 @@ TBST::TNode* TBST::deleteRecursive(TNode* node, int key)
     }
     else
     {
-        // found node to delete
         if (!node->left && !node->right)
         {
             delete node;

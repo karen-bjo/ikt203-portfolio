@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IKT203_COURSE_ASSIGNMENTS_EMPLOYEE_H
+#define IKT203_COURSE_ASSIGNMENTS_EMPLOYEE_H
+
 #include <string>
 
 enum class EDepartment
@@ -26,3 +28,5 @@ int employeeCompareToName(const TEmployee* e, const std::string& last, const std
 
 std::string departmentToString(EDepartment d);
 EDepartment getRandomDepartment();
+
+#endif // IKT203_COURSE_ASSIGNMENTS_EMPLOYEE_H

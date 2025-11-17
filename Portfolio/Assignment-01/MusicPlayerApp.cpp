@@ -57,8 +57,8 @@ void MusicPlayerApp::showMainMenu() const
               << "2) Add song to queue" << std::endl
               << "3) Play next song" << std::endl
               << "4) Show play history" << std::endl
-              << "5) Play previous song (from history)" << std::endl
-              << "6) Show queues (main & wish) [extra]" << std::endl
+              << "5) Play previous song" << std::endl
+              << "6) Show queues" << std::endl
               << "0) Exit" << std::endl;
 }
 

@@ -5,7 +5,6 @@
 #ifndef OPTION2_H
 #define OPTION2_H
 
-// Entry point for this assignment option, called from main.cpp
 int RunApp();
 
 #endif // OPTION2_H

@@ -80,16 +80,3 @@ void TSongLibraryList::printAll() const
         ++index;
     }
 }
-
-void TSongLibraryList::printAllReverse() const
-{
-    Node* current = tail;
-    int   index   = static_cast<int>(count) - 1;
-
-    while (current != nullptr)
-    {
-        std::cout << index << ": " << current->data->toString() << std::endl;
-        current = current->prev;
-        --index;
-    }
-}

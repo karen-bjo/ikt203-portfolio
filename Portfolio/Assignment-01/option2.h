@@ -1,4 +1,4 @@
-// option1.h : Option 2 (Advanced): Console Music Player.
+// option2.h : Option 2 (Advanced): Console Music Player.
 #pragma once
 
 #ifndef OPTION2_H
