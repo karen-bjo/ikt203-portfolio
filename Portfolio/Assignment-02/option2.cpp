@@ -4,6 +4,8 @@
 #include "EmployeeDirectory.h"
 #include <iostream>
 #include <limits>
+
+#include "DataPath.h"
 #include "SharedLib.h"
 
 int RunApp()
@@ -35,7 +37,7 @@ int RunApp()
         {
         case 1:
         {
-            std::string filename = "C:/Users/andre/UIA/3sem/ikt203g25h/ikt203-portfolio/DATA/random_names.txt";  //find solution
+            std::string filename = GetDataPath("random_names.txt");
             loadEmployees(filename);
             break;
         }

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 
+#include "DataPath.h"
 #include "TGraph.h"
 #include "TNode.h"
 #include "SharedLib.h"    // declares readGraphFromFile, FNodeRead, FEdgeRead
@@ -46,8 +47,7 @@ int RunApp()
 	TGraph graph;
 	gCurrentGraph = &graph;
 
-	//exe runs from cmake-build-debug, DATA is one level up
-	std::string filePath = "../../../DATA/network_graph.txt";
+	std::string filePath = GetDataPath("network_graph.txt");
 	std::cout << "Loading graph from: " << filePath << std::endl;
 
 	//readGraphFromFile is implemented in ReadGraph.cpp, declared in SharedLib.h

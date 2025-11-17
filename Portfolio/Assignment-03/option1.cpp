@@ -11,10 +11,11 @@
 #include "TEmployee.h"
 #include "BST.h"
 #include "AVLTree.h"
+#include "DataPath.h"
 
 static bool LoadEmployees(std::vector<TEmployee*>& outEmployees)
 {
-    std::string filePath = "C:/Users/andre/UIA/3sem/ikt203g25h/ikt203-portfolio/DATA/random_names.txt";
+    std::string filePath = GetDataPath("random_names.txt");;
 
     std::ifstream in(filePath);
     if (!in.is_open())

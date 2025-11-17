@@ -12,7 +12,6 @@ endif()
 project ("Portfolio")
 
 # Add shared libraries (available to all assignments) FIRST
-add_subdirectory(DataStructures)   # header-only DS target
 add_subdirectory(SharedLib)        # I/O helpers
 
 # Include sub-projects.

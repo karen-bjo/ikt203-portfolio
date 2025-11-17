@@ -4,12 +4,14 @@
 #include <iostream>
 #include <sstream>
 
+#include "DataPath.h"
+
 MusicPlayerApp::MusicPlayerApp() = default;
 MusicPlayerApp::~MusicPlayerApp() = default;
 
 void MusicPlayerApp::run()
 {
-    const std::string songsPath = "../DATA/songs.txt";
+    const std::string songsPath = GetDataPath("songs.txt");
 
     if (!loadLibraryFromFile(songsPath))
     {
