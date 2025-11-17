@@ -15,7 +15,7 @@ int RunApp()
     while (running)
     {
         std::cout << std::endl;
-        std::cout << "Combined Corporate Directory:" << std::endl;
+        std::cout << "--- Combined Corporate Directory ---" << std::endl;
         std::cout << "1. Load employees from file" << std::endl;
         std::cout << "2. Show master roll call (Merge Sort on list)" << std::endl;
         std::cout << "3. Show organizational chart (Quick Sort on array)" << std::endl;

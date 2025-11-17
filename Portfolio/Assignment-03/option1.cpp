@@ -103,10 +103,6 @@ static void PrintMenu()
 
 int RunApp()
 {
-    std::cout << "Assignment 03 - Category 3: Trees (BST, AVL & RBT)" << std::endl;
-    std::cout << "Option 1 (Standard): Employee Directory (BST vs. AVL)" << std::endl;
-    std::cout << std::endl;
-
     std::vector<TEmployee*> employees;
     if (!LoadEmployees(employees))
     {
