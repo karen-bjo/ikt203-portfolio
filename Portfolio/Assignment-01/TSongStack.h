@@ -9,11 +9,10 @@ public:
     TSongStack();
     ~TSongStack();
 
-    void push(TSong* song);  // LIFO push
-    TSong* pop();            // LIFO pop, nullptr if empty
+    void push(TSong* song);
+    TSong* pop();
     bool isEmpty() const;
 
-    // Extra (beyond assignment): see all history
     void print() const;
 
     TSongStack(const TSongStack&) = delete;

@@ -3,7 +3,6 @@
 
 class TNode;
 
-//represents a weighted connection between two nodes
 class TEdge
 {
 public:
@@ -14,8 +13,8 @@ public:
     int getWeight() const;
 
 private:
-    TNode *fromNode; //non-owning
-    TNode *toNode;   //non-owning
+    TNode *fromNode;
+    TNode *toNode;
     int edgeWeight;
 };
 

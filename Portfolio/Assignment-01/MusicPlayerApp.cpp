@@ -36,8 +36,8 @@ void MusicPlayerApp::run()
                 break;
             case 5: handlePlayPreviousSong();
                 break;
-            case 6: handleShowQueues();
-                break; // extra
+            case 6: handleShowQueues(); //added this beyond requirements because it seemed practical
+                break;
             case 0: running = false;
                 break;
             default:
@@ -72,7 +72,7 @@ int MusicPlayerApp::readInt(const std::string& prompt) const
         std::cin.ignore(1024, '\n');
         std::cout << "Invalid number, try again: ";
     }
-    std::cin.ignore(1024, '\n'); // consume rest of line
+    std::cin.ignore(1024, '\n');
     return value;
 }
 
@@ -86,14 +86,12 @@ bool MusicPlayerApp::loadLibraryFromFile(const std::string& filePath)
 
     std::string line;
 
-    // First line often looks like: [records=50]
     if (!std::getline(in, line))
     {
         return false;
     }
     if (!line.empty() && line[0] != '[')
     {
-        // First line is already a song line, rewind.
         in.seekg(0);
     }
 

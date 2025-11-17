@@ -4,25 +4,20 @@
 #include "TSong.h"
 #include <cstddef>
 
-//doubly linked list of TSong*
 class TSongLibraryList
 {
 public:
     TSongLibraryList();
     ~TSongLibraryList();
 
-    // Add song pointer at the end. O(1)
     void append(TSong* song);
 
-    // Access song by index (0..count-1). Returns nullptr if out of range.
     TSong* getSongByIndex(int index) const;
 
     std::size_t getCount() const;
 
-    // Print all songs in forward order. (Required-ish for UI)
     void printAll() const;
 
-    // Disable copying (avoids double-delete bugs).
     TSongLibraryList(const TSongLibraryList&) = delete;
     TSongLibraryList& operator=(const TSongLibraryList&) = delete;
 

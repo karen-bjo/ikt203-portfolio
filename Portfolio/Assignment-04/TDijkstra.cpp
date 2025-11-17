@@ -32,7 +32,6 @@ bool TDijkstra::findShortestPath(const std::string &sourceName, const std::strin
 
     TMinHeap heap;
 
-    //initialize all distances to INF
     const std::vector<TNode*> &nodes = graph.getNodes();
     for (TNode *node : nodes)
         distance[node] = INF;
@@ -76,10 +75,9 @@ bool TDijkstra::findShortestPath(const std::string &sourceName, const std::strin
 
     if (distance[destinationNode] == INF)
     {
-        return false; //no path
+        return false;
     }
 
-    //reconstruct path backwards from destination
     TNode *current = destinationNode;
     while (current != nullptr)
     {

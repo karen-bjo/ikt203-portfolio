@@ -15,7 +15,7 @@ void TSongQueue::clear()
     while (current != nullptr)
     {
         Node* next = current->next;
-        delete current;   //queue does not own TSong*, only the nodes
+        delete current;
         current = next;
     }
     front = nullptr;

@@ -54,12 +54,10 @@ void TGraph::addUndirectedEdge(const std::string &fromName, const std::string &t
     TNode *fromNode = getOrCreateNode(fromName);
     TNode *toNode = getOrCreateNode(toName);
 
-    //edge from -> to
     TEdge *edge1 = new TEdge(fromNode, toNode, weight);
     edges.push_back(edge1);
     fromNode->addEdge(edge1);
 
-    //edge to -> from (because graph is undirected)
     TEdge *edge2 = new TEdge(toNode, fromNode, weight);
     edges.push_back(edge2);
     toNode->addEdge(edge2);

@@ -2,9 +2,7 @@
 #include <iostream>
 
 TSongStack::TSongStack()
-    : top(nullptr)
-{
-}
+    : top(nullptr) {}
 
 TSongStack::~TSongStack()
 {
@@ -17,7 +15,7 @@ void TSongStack::clear()
     while (current != nullptr)
     {
         Node* next = current->next;
-        delete current;    // stack DOES NOT own TSong*, only nodes
+        delete current;
         current = next;
     }
     top = nullptr;

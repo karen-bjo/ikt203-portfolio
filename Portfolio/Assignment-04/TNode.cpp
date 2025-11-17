@@ -2,9 +2,7 @@
 #include "TEdge.h"
 
 TNode::TNode(const std::string &name)
-    : nodeName(name)
-{
-}
+    : nodeName(name) {}
 
 const std::string &TNode::getName() const
 {

@@ -3,22 +3,18 @@
 
 #include "TSong.h"
 
-//singly linked FIFO queue
 class TSongQueue
 {
 public:
     TSongQueue();
     ~TSongQueue();
 
-    // Standard queue ops
-    void enqueue(TSong* song);   // add at back
-    TSong* dequeue();              // remove from front, nullptr if empty
+    void enqueue(TSong* song);
+    TSong* dequeue();
     bool isEmpty() const;
 
-    // Needed for "play previous": add at front of wish queue
     void enqueueFront(TSong* song);
 
-    // Extra (beyond assignment): debug / inspection
     void print() const;
 
     TSongQueue(const TSongQueue&) = delete;
