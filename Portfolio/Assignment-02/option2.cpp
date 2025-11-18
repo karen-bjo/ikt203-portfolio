@@ -10,17 +10,22 @@
 
 int RunApp()
 {
+    std::string filename = GetDataPath("random_names.txt");
     bool running = true;
 
     while (running)
     {
+        if (!hasEmployees())
+        {
+            loadEmployees(filename);
+        }
+
         std::cout << std::endl;
         std::cout << "--- Combined Corporate Directory ---" << std::endl;
-        std::cout << "1. Load employees from file" << std::endl;
-        std::cout << "2. Show master roll call" << std::endl;
-        std::cout << "3. Show organizational chart" << std::endl;
-        std::cout << "4. Look up employee" << std::endl;
-        std::cout << "5. Exit" << std::endl;
+        std::cout << "1. Show master roll call" << std::endl;
+        std::cout << "2. Show organizational chart" << std::endl;
+        std::cout << "3. Look up employee" << std::endl;
+        std::cout << "4. Exit" << std::endl;
         std::cout << "Choice: ";
 
         int choice = 0;
@@ -36,25 +41,13 @@ int RunApp()
         switch (choice)
         {
         case 1:
-        {
-            std::string filename = GetDataPath("random_names.txt");
-            loadEmployees(filename);
-            break;
-        }
-        case 2:
             printMasterRollCall();
             break;
-        case 3:
+        case 2:
             printOrganizationalChart();
             break;
-        case 4:
+        case 3:
         {
-            if (!hasEmployees())
-            {
-                std::cout << "No employees loaded" << std::endl;
-                break;
-            }
-
             std::string last, first;
             std::cout << "Enter last name: ";
             std::getline(std::cin, last);
@@ -73,7 +66,7 @@ int RunApp()
             }
             break;
         }
-        case 5:
+        case 4:
             running = false;
             break;
         default:
