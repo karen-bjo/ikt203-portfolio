@@ -168,7 +168,7 @@ int RunApp()
 
                 if (bstResult)
                 {
-                    std::cout << "[BST] Found: ID " << bstResult->employeeId << " | " << bstResult->firstName << " "
+                    std::cout << "[BST] Found: ID " << bstResult->employeeId << " - " << bstResult->firstName << " "
                               << bstResult->lastName << std::endl;
                 }
                 else
@@ -178,7 +178,7 @@ int RunApp()
 
                 if (avlResult)
                 {
-                    std::cout << "[AVL] Found: ID " << avlResult->employeeId << " | " << avlResult->firstName << " "
+                    std::cout << "[AVL] Found: ID " << avlResult->employeeId << " - " << avlResult->firstName << " "
                               << avlResult->lastName << std::endl;
                 }
                 else
