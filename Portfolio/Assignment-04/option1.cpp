@@ -9,12 +9,10 @@
 #include "DataPath.h"
 #include "TGraph.h"
 #include "TNode.h"
-#include "SharedLib.h"    // declares readGraphFromFile, FNodeRead, FEdgeRead
+#include "SharedLib.h"
 
-//global pointer to the graph used while reading the file
 static TGraph *gCurrentGraph = nullptr;
 
-//callback for each node line in the file
 static bool OnNodeRead(int index, int total, const std::string &nodeName)
 {
 	if (gCurrentGraph == nullptr)
@@ -24,13 +22,11 @@ static bool OnNodeRead(int index, int total, const std::string &nodeName)
 	return true;
 }
 
-//callback for each edge line in the file
 static bool OnEdgeRead(int index, int total, const std::string &fromNode, const std::string &toNode, float weight)
 {
 	if (gCurrentGraph == nullptr)
 		return false;
 
-	//our graph uses int weights, file uses float -> cast
 	gCurrentGraph->addUndirectedEdge(fromNode, toNode, static_cast<int>(weight));
 	return true;
 }
@@ -43,7 +39,6 @@ int RunApp()
 	std::string filePath = GetDataPath("network_graph.txt");
 	std::cout << "Loading graph from: " << filePath << std::endl;
 
-	//readGraphFromFile is implemented in ReadGraph.cpp, declared in SharedLib.h
 	readGraphFromFile(filePath, OnNodeRead, OnEdgeRead);
 
 	std::cout << "Nodes loaded from graph:" << std::endl;
@@ -84,7 +79,6 @@ int RunApp()
 	{
 		std::cout << "No path found, or one of the server names was invalid." << std::endl;
 	}
-
 
 	gCurrentGraph = nullptr;
 	return 0;
