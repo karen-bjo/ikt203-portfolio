@@ -38,15 +38,13 @@ void MusicPlayerApp::run()
                 break;
             case 6: handleShowQueues(); //added this beyond requirements because it seemed practical
                 break;
-            case 0: running = false;
+            case 7: running = false;
                 break;
             default:
                 std::cout << "Unknown choice." << std::endl;
                 break;
         }
     }
-
-    std::cout << "Goodbye!" << std::endl;
 }
 
 void MusicPlayerApp::showMainMenu() const
@@ -59,7 +57,7 @@ void MusicPlayerApp::showMainMenu() const
               << "4) Show play history" << std::endl
               << "5) Play previous song" << std::endl
               << "6) Show queues" << std::endl
-              << "0) Exit" << std::endl;
+              << "7) Exit" << std::endl;
 }
 
 int MusicPlayerApp::readInt(const std::string& prompt) const

@@ -18,9 +18,7 @@ static TGraph *gCurrentGraph = nullptr;
 static bool OnNodeRead(int index, int total, const std::string &nodeName)
 {
 	if (gCurrentGraph == nullptr)
-	{
 		return false;
-	}
 
 	gCurrentGraph->getOrCreateNode(nodeName);
 	return true;
@@ -30,9 +28,7 @@ static bool OnNodeRead(int index, int total, const std::string &nodeName)
 static bool OnEdgeRead(int index, int total, const std::string &fromNode, const std::string &toNode, float weight)
 {
 	if (gCurrentGraph == nullptr)
-	{
 		return false;
-	}
 
 	//our graph uses int weights, file uses float -> cast
 	gCurrentGraph->addUndirectedEdge(fromNode, toNode, static_cast<int>(weight));

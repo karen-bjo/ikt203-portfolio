@@ -97,7 +97,7 @@ static void PrintMenu()
     std::cout << "3. Search employee by ID" << std::endl;
     std::cout << "4. Delete employee from BST by ID" << std::endl;
     std::cout << "5. Show traversals (BST + AVL)" << std::endl;
-    std::cout << "0. Exit" << std::endl;
+    std::cout << "6. Exit" << std::endl;
     std::cout << "Choose: ";
 }
 
@@ -119,7 +119,7 @@ int RunApp()
     }
 
     int choice = -1;
-    while (choice != 0)
+    while (choice != 6)
     {
         PrintMenu();
         if (!(std::cin >> choice))
