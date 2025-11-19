@@ -1,9 +1,13 @@
-#pragma once
+#ifndef IKT203_COURSE_ASSIGNMENTS_AVL_TREE_H
+#define IKT203_COURSE_ASSIGNMENTS_AVL_TREE_H
+
 #include "TEmployee.h"
 
-class TAVLTree {
+class TAVLTree
+{
 private:
-    struct TNode {
+    struct TNode
+    {
         int key;
         TEmployee* data;
         TNode* left;
@@ -44,3 +48,5 @@ public:
     void postorder() const;
     void levelOrder() const;
 };
+
+#endif // IKT203_COURSE_ASSIGNMENTS_AVL_TREE_H

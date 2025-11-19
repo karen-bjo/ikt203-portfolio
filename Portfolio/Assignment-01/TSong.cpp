@@ -1,15 +1,8 @@
 #include "TSong.h"
 
-TSong::TSong(const std::string& artist,
-             const std::string& title,
-             int year,
-             const std::string& genre,
+TSong::TSong(const std::string& artist, const std::string& title, int year, const std::string& genre,
              const std::string& source)
-    : artist(artist),
-      title(title),
-      year(year),
-      genre(genre),
-      source(source)
+    : artist(artist), title(title), year(year), genre(genre), source(source)
 {
 }
 

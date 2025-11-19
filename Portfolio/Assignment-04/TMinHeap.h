@@ -6,7 +6,6 @@
 
 class TNode;
 
-//min-priority queue storing nodes by their distance value
 class TMinHeap
 {
 public:
@@ -14,10 +13,8 @@ public:
 
     bool isEmpty() const;
 
-    //insert new node or decrease distance if node already exists
     void insertOrDecrease(TNode *node, int distance);
 
-    //extract node with smallest distance; returns false if empty
     bool extractMin(TNode *&outNode, int &outDistance);
 
 private:
@@ -28,7 +25,7 @@ private:
     };
 
     std::vector<THeapItem> items;
-    std::unordered_map<TNode*, int> nodeIndex; //maps node -> index in items
+    std::unordered_map<TNode*, int> nodeIndex;
 
     void bubbleUp(int index);
     void bubbleDown(int index);

@@ -6,37 +6,27 @@
 #include <iostream>
 #include <string>
 
+#include "DataPath.h"
 #include "TGraph.h"
 #include "TNode.h"
-#include "SharedLib.h"    // declares readGraphFromFile, FNodeRead, FEdgeRead
+#include "SharedLib.h"
 
-//global pointer to the graph used while reading the file
 static TGraph *gCurrentGraph = nullptr;
 
-//callback for each node line in the file
 static bool OnNodeRead(int index, int total, const std::string &nodeName)
 {
 	if (gCurrentGraph == nullptr)
-	{
 		return false;
-	}
 
 	gCurrentGraph->getOrCreateNode(nodeName);
 	return true;
 }
 
-//callback for each edge line in the file
-static bool OnEdgeRead(int index, int total,
-					   const std::string &fromNode,
-					   const std::string &toNode,
-					   float weight)
+static bool OnEdgeRead(int index, int total, const std::string &fromNode, const std::string &toNode, float weight)
 {
 	if (gCurrentGraph == nullptr)
-	{
 		return false;
-	}
 
-	//our graph uses int weights, file uses float -> cast
 	gCurrentGraph->addUndirectedEdge(fromNode, toNode, static_cast<int>(weight));
 	return true;
 }
@@ -46,19 +36,17 @@ int RunApp()
 	TGraph graph;
 	gCurrentGraph = &graph;
 
-	//exe runs from cmake-build-debug, DATA is one level up
-	std::string filePath = "../../../DATA/network_graph.txt";
+	std::string filePath = GetDataPath("network_graph.txt");
 	std::cout << "Loading graph from: " << filePath << std::endl;
 
-	//readGraphFromFile is implemented in ReadGraph.cpp, declared in SharedLib.h
 	readGraphFromFile(filePath, OnNodeRead, OnEdgeRead);
 
-	std::cout << "Nodes loaded from graph:\n";
+	std::cout << "Nodes loaded from graph:" << std::endl;
 	for (TNode *node : graph.getNodes())
 	{
-		std::cout << "- " << node->getName() << '\n';
+		std::cout << "- " << node->getName() << std::endl;
 	}
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	std::string sourceName;
 	std::string destinationName;
@@ -84,13 +72,13 @@ int RunApp()
 				std::cout << " -> ";
 			}
 		}
-		std::cout << "\nTotal latency: " << totalCost << '\n';
+		std::cout << std::endl;
+		std::cout << "Total latency: " << totalCost << std::endl;
 	}
 	else
 	{
-		std::cout << "No path found, or one of the server names was invalid.\n";
+		std::cout << "No path found, or one of the server names was invalid." << std::endl;
 	}
-
 
 	gCurrentGraph = nullptr;
 	return 0;

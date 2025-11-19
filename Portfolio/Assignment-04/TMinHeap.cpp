@@ -37,9 +37,7 @@ void TMinHeap::insertOrDecrease(TNode *node, int distance)
 bool TMinHeap::extractMin(TNode *&outNode, int &outDistance)
 {
     if (items.empty())
-    {
         return false;
-    }
 
     THeapItem root = items.front();
     outNode = root.node;

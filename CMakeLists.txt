@@ -6,6 +6,11 @@ cmake_minimum_required(VERSION 3.20)
 # It also enables the C++ language (CXX).
 project(IKT203_Course_Assignments LANGUAGES CXX)
 
+# CHANGED: make the DATA directory path available in all code
+add_compile_definitions(
+        IKT203_DATA_DIR="${CMAKE_SOURCE_DIR}/DATA"
+)
+
 # We enforce C++17 (or C++20 if you prefer) for the entire project.
 # All targets (exercises, libraries, etc.) will inherit this setting.
 set(CMAKE_CXX_STANDARD 17)

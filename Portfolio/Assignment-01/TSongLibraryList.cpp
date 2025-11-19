@@ -17,12 +17,12 @@ void TSongLibraryList::clear()
     while (current != nullptr)
     {
         Node* next = current->next;
-        delete current->data;  // list OWNS the TSong*
+        delete current->data;
         delete current;
         current = next;
     }
-    head  = nullptr;
-    tail  = nullptr;
+    head = nullptr;
+    tail = nullptr;
     count = 0;
 }
 
@@ -39,7 +39,7 @@ void TSongLibraryList::append(TSong* song)
     {
         node->prev = tail;
         tail->next = node;
-        tail       = node;
+        tail = node;
     }
 
     ++count;
@@ -53,7 +53,7 @@ TSong* TSongLibraryList::getSongByIndex(int index) const
     }
 
     Node* current = head;
-    int   i       = 0;
+    int i = 0;
     while (current != nullptr && i < index)
     {
         current = current->next;
@@ -71,25 +71,12 @@ std::size_t TSongLibraryList::getCount() const
 void TSongLibraryList::printAll() const
 {
     Node* current = head;
-    int   index   = 0;
+    int index = 0;
 
     while (current != nullptr)
     {
-        std::cout << index << ": " << current->data->toString() << '\n';
+        std::cout << index << ": " << current->data->toString() << std::endl;
         current = current->next;
         ++index;
-    }
-}
-
-void TSongLibraryList::printAllReverse() const
-{
-    Node* current = tail;
-    int   index   = static_cast<int>(count) - 1;
-
-    while (current != nullptr)
-    {
-        std::cout << index << ": " << current->data->toString() << '\n';
-        current = current->prev;
-        --index;
     }
 }

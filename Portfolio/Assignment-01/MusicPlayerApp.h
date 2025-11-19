@@ -12,10 +12,10 @@ public:
     MusicPlayerApp();
     ~MusicPlayerApp();
 
-    void run();  // main menu loop
+    void run();
 
 private:
-    TSongLibraryList library;   // owns TSong objects
+    TSongLibraryList library;
     TSongQueue       mainQueue;
     TSongQueue       wishQueue;
     TSongStack       history;

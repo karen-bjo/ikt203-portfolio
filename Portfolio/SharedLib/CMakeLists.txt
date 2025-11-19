@@ -2,7 +2,8 @@
 
 # Define a library target named "SharedLib".
 # We use STATIC because we are using cpp and header files.
-add_library(SharedLib STATIC)
+add_library(SharedLib STATIC
+        DataPath.h)
 
 # --- Step 2: Add Header Files to the Library ---
 

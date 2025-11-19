@@ -1,12 +1,7 @@
 #include "TEdge.h"
-#include "TNode.h"
 
 TEdge::TEdge(TNode *from, TNode *to, int weight)
-    : fromNode(from),
-      toNode(to),
-      edgeWeight(weight)
-{
-}
+    : fromNode(from), toNode(to), edgeWeight(weight) {}
 
 TNode *TEdge::getFrom() const
 {

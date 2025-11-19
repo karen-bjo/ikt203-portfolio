@@ -4,9 +4,8 @@
 #include <string>
 #include <vector>
 
-class TEdge; //forward declaration
+class TEdge;
 
-//represents one server/node in the network graph
 class TNode
 {
 public:
@@ -19,7 +18,7 @@ public:
 
 private:
     std::string nodeName;
-    std::vector<TEdge*> edges; //non-owning pointers, owned by TGraph
+    std::vector<TEdge*> edges;
 };
 
 #endif //IKT203_COURSE_ASSIGNMENTS_TNODE_H

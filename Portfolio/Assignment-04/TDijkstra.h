@@ -7,17 +7,13 @@
 class TGraph;
 class TNode;
 
-//runs Dijkstra's algorithm on a TGraph
 class TDijkstra
 {
 public:
     explicit TDijkstra(TGraph &graph);
 
-    //returns true if a path exists, false otherwise
-    bool findShortestPath(const std::string &sourceName,
-                          const std::string &destinationName,
-                          std::vector<TNode*> &outPath,
-                          int &outTotalCost);
+    bool findShortestPath(const std::string &sourceName, const std::string &destinationName,
+                          std::vector<TNode*> &outPath, int &outTotalCost);
 
 private:
     TGraph &graph;

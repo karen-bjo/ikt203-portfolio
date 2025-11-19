@@ -2,192 +2,207 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <string>
 #include <vector>
-#include <cstdlib>
 #include <ctime>
+#include <limits>
 
 #include "TEmployee.h"
 #include "BST.h"
 #include "AVLTree.h"
+#include "DataPath.h"
+#include "SharedLib.h"
 
-static bool LoadEmployees(std::vector<TEmployee*>& outEmployees) {
-    std::string filePath = "C:/Users/andre/UIA/3sem/ikt203g25h/ikt203-portfolio/DATA/random_names.txt";
+static std::vector<TEmployee*> gEmployees;
+static TBST gBst;
+static TAVLTree gAvl;
 
-    std::ifstream in(filePath);
-    if (!in.is_open()) {
-        std::cout << "Could not open default path '" << filePath << "'.\n";
-        std::cout << "Enter full path to random_names.txt:\n> ";
-        std::getline(std::cin >> std::ws, filePath);
-        in.open(filePath);
-        if (!in.is_open()) {
-            std::cout << "Still could not open file. Aborting.\n";
-            return false;
+static bool OnNameRead(const int aIndex, const int aTotalCount, const std::string& aFirstName, const std::string& aLastName)
+{
+    if (aIndex >= 200)
+        return false;
+
+    auto* employee = new TEmployee{};
+    employee->firstName = aFirstName;
+    employee->lastName  = aLastName;
+
+    int id = 0;
+    bool isUnique = false;
+
+    while (!isUnique)
+    {
+        id = 100000 + std::rand();
+        isUnique = true;
+
+        for (TEmployee* existing : gEmployees)
+        {
+            if (existing->employeeId == id)
+            {
+                isUnique = false;
+                break;
+            }
         }
     }
 
+    employee->employeeId = id;
 
-    const int MAX_EMPLOYEES = 200;
+    gEmployees.push_back(employee);
+    gBst.insert(id, employee);
+    gAvl.insert(id, employee);
 
+    return true;
+}
+
+static void PrintMenu()
+{
+    std::cout << std::endl;
+    std::cout << "--- Employee Directory (BST vs. AVL) ---" << std::endl;
+    std::cout << "1) Print BST traversals" << std::endl;
+    std::cout << "2) Print AVL traversals" << std::endl;
+    std::cout << "3) Search for employee by ID" << std::endl;
+    std::cout << "4) Exit" << std::endl;
+}
+
+static void PrintBSTTraversals()
+{
+    std::cout << std::endl;
+    std::cout << "--- BST Traversals ---" << std::endl;
+
+    std::cout << "Inorder:" << std::endl;
+    gBst.inorder();
+    std::cout << std::endl;
+
+    std::cout << "Preorder:" << std::endl;
+    gBst.preorder();
+    std::cout << std::endl;
+
+    std::cout << "Postorder:" << std::endl;
+    gBst.postorder();
+    std::cout << std::endl;
+
+    std::cout << "Level-order:" << std::endl;
+    gBst.levelOrder();
+    std::cout << std::endl;
+}
+
+static void PrintAVLTraversals()
+{
+    std::cout << std::endl;
+    std::cout << "--- AVL Traversals ---" << std::endl;
+
+    std::cout << "Inorder:" << std::endl;
+    gAvl.inorder();
+    std::cout << std::endl;
+
+    std::cout << "Preorder:" << std::endl;
+    gAvl.preorder();
+    std::cout << std::endl;
+
+    std::cout << "Postorder:" << std::endl;
+    gAvl.postorder();
+    std::cout << std::endl;
+
+    std::cout << "Level-order:" << std::endl;
+    gAvl.levelOrder();
+    std::cout << std::endl;
+}
+
+int RunApp()
+{
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    std::vector<int> usedIds;
+    const std::string filename = GetDataPath("random_names.txt");
+    readNamesFromFile(filename, OnNameRead);
 
-    auto generateUniqueId = [&](int minId, int maxId) -> int {
-        for (;;) {
-            int id = minId + std::rand() % (maxId - minId + 1);
-            bool exists = false;
-            for (int used : usedIds) {
-                if (used == id) {
-                    exists = true;
+    if (gEmployees.empty())
+    {
+        std::cout << "No employees were loaded. Exiting." << std::endl;
+        return 0;
+    }
+
+    bool running = true;
+
+    while (running)
+    {
+        PrintMenu();
+
+        int choice = 0;
+        std::cout << "Choose an option: ";
+
+        if (!(std::cin >> choice))
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input" << std::endl;
+            continue;
+        }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        switch (choice)
+        {
+            case 1:
+                PrintBSTTraversals();
+                break;
+
+            case 2:
+                PrintAVLTraversals();
+                break;
+
+            case 3:
+            {
+                int id = 0;
+                std::cout << "Enter employee ID: ";
+
+                if (!(std::cin >> id))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid ID" << std::endl;
                     break;
                 }
-            }
-            if (!exists) {
-                usedIds.push_back(id);
-                return id;
-            }
-        }
-    };
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::string line;
-    int count = 0;
 
-    while (count < MAX_EMPLOYEES && std::getline(in, line)) {
-        if (line.empty()) {
-            continue;
-        }
+                TEmployee* bstResult = gBst.search(id);
+                TEmployee* avlResult = gAvl.search(id);
 
-        std::istringstream iss(line);
-        std::string first;
-        std::string last;
+                if (bstResult)
+                {
+                    std::cout << "[BST] Found: ID " << bstResult->employeeId << " - " << bstResult->firstName << " "
+                              << bstResult->lastName << std::endl;
+                }
+                else
+                {
+                    std::cout << "[BST] Employee not found." << std::endl;
+                }
 
-        // Very simple parsing: "First Last"
-        if (!(iss >> first >> last)) {
-            continue;
-        }
-
-        // Strip trailing comma from last if present (e.g., "Smith,")
-        if (!last.empty() && last.back() == ',') {
-            last.pop_back();
-        }
-
-        TEmployee* e = new TEmployee;
-        e->employeeId = generateUniqueId(100000, 999999);
-        e->firstName = first;
-        e->lastName = last;
-
-        outEmployees.push_back(e);
-        ++count;
-    }
-
-    std::cout << "Loaded " << outEmployees.size() << " employees.\n";
-    return !outEmployees.empty();
-}
-
-static void PrintMenu() {
-    std::cout << "\n=== Employee Directory (BST vs AVL) ===\n";
-    std::cout << "1. Show all employees (BST inorder)\n";
-    std::cout << "2. Show all employees (AVL inorder)\n";
-    std::cout << "3. Search employee by ID\n";
-    std::cout << "4. Delete employee from BST by ID\n";
-    std::cout << "5. Show traversals (BST + AVL)\n";
-    std::cout << "0. Exit\n";
-    std::cout << "Choose: ";
-}
-
-int RunApp() {
-    std::cout << "Assignment 03 - Category 3: Trees (BST, AVL & RBT)\n";
-    std::cout << "Option 1 (Standard): Employee Directory (BST vs. AVL)\n\n";
-
-    std::vector<TEmployee*> employees;
-    if (!LoadEmployees(employees)) {
-        return 1;
-    }
-
-    TBST bst;
-    TAVLTree avl;
-
-    for (TEmployee* e : employees) {
-        bst.insert(e->employeeId, e);
-        avl.insert(e->employeeId, e);
-    }
-
-    int choice = -1;
-    while (choice != 0) {
-        PrintMenu();
-        if (!(std::cin >> choice)) {
-            std::cin.clear();
-            std::cin.ignore(1024, '\n');
-            continue;
-        }
-
-        if (choice == 1) {
-            std::cout << "\n--- BST Inorder (sorted by ID) ---\n";
-            bst.inorder();
-        } else if (choice == 2) {
-            std::cout << "\n--- AVL Inorder (sorted by ID) ---\n";
-            avl.inorder();
-        } else if (choice == 3) {
-            int id;
-            std::cout << "Enter employee ID to search: ";
-            std::cin >> id;
-
-            TEmployee* e1 = bst.search(id);
-            TEmployee* e2 = avl.search(id);
-
-            std::cout << "\nBST search:\n";
-            if (e1) {
-                std::cout << "Found: " << e1->employeeId << " "
-                          << e1->firstName << " " << e1->lastName << "\n";
-            } else {
-                std::cout << "Not found in BST.\n";
+                if (avlResult)
+                {
+                    std::cout << "[AVL] Found: ID " << avlResult->employeeId << " - " << avlResult->firstName << " "
+                              << avlResult->lastName << std::endl;
+                }
+                else
+                {
+                    std::cout << "[AVL] Employee not found." << std::endl;
+                }
+                break;
             }
 
-            std::cout << "AVL search:\n";
-            if (e2) {
-                std::cout << "Found: " << e2->employeeId << " "
-                          << e2->firstName << " " << e2->lastName << "\n";
-            } else {
-                std::cout << "Not found in AVL.\n";
-            }
+            case 4:
+                running = false;
+                break;
 
-        } else if (choice == 4) {
-            int id;
-            std::cout << "Enter employee ID to delete from BST: ";
-            std::cin >> id;
-            bst.deleteKey(id);
-            std::cout << "BST after deletion (inorder):\n";
-            bst.inorder();
-        } else if (choice == 5) {
-            std::cout << "\n--- BST Traversals ---\n";
-            std::cout << "Inorder:\n";
-            bst.inorder();
-            std::cout << "\nPreorder:\n";
-            bst.preorder();
-            std::cout << "\nPostorder:\n";
-            bst.postorder();
-            std::cout << "\nLevel-order:\n";
-            bst.levelOrder();
-
-            std::cout << "\n\n--- AVL Traversals ---\n";
-            std::cout << "Inorder:\n";
-            avl.inorder();
-            std::cout << "\nPreorder:\n";
-            avl.preorder();
-            std::cout << "\nPostorder:\n";
-            avl.postorder();
-            std::cout << "\nLevel-order:\n";
-            avl.levelOrder();
+            default:
+                std::cout << "Invalid choice." << std::endl;
+                break;
         }
     }
 
-    // Trees do NOT own employees; free them here
-    for (TEmployee* e : employees) {
-        delete e;
+    for (TEmployee* employee : gEmployees)
+    {
+        delete employee;
     }
+    gEmployees.clear();
 
-    std::cout << "Goodbye.\n";
     return 0;
 }

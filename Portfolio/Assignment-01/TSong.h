@@ -9,13 +9,9 @@ class TSong
 public:
     TSong() = default;
 
-    TSong(const std::string& artist,
-          const std::string& title,
-          int year,
-          const std::string& genre,
+    TSong(const std::string& artist, const std::string& title, int year, const std::string& genre,
           const std::string& source);
 
-    //returns a readable version of the song (used in menus)
     std::string toString() const;
 
     std::string artist;
