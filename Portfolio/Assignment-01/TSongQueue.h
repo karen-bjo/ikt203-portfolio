@@ -25,7 +25,7 @@ private:
     {
     public:
         TSong* data;
-        Node*  next;
+        Node* next;
 
         Node(TSong* d, Node* n) : data(d), next(n) {}
     };

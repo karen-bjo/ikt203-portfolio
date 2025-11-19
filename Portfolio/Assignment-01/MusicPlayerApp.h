@@ -28,7 +28,6 @@ private:
     void handleShowHistory() const;
     void handlePlayPreviousSong();
 
-    // Extra (beyond assignment): show both queues
     void handleShowQueues() const;
 
     void showMainMenu() const;

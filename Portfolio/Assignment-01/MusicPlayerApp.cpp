@@ -224,7 +224,7 @@ void MusicPlayerApp::handlePlayPreviousSong()
     }
 
     TSong* song = history.pop();
-    wishQueue.enqueueFront(song);  // should play before anything else
+    wishQueue.enqueueFront(song);
     std::cout << "Previous song moved to front of wish queue: "
               << song->toString() << std::endl;
 }

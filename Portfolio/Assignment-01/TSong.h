@@ -3,7 +3,6 @@
 
 #include <string>
 
-//simple data class representing one song
 class TSong
 {
 public:
